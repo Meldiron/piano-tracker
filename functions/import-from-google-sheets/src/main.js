@@ -14,7 +14,5 @@ export default async ({ req, res, log, error }) => {
 
     const rows = csv.parse(file);
 
-    return res.send({
-      output: rows
-    });
+    return res.send(rows);
 };
