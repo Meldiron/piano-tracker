@@ -8,6 +8,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "csv-string": "^4.1.1",
     "node-appwrite": "^9.0.0"
   },
   "devDependencies": {
