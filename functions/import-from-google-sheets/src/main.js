@@ -16,11 +16,11 @@ export default async ({ req, res, log, error }) => {
 
   let rows = csv.parse(file);
   rows = rows.sort((a, b) => {
-    aArr = (a[1] ?? '').split('-') ?? [];
-    aId = +(aArr[aArr.length - 1] ?? '0');
+    let aArr = (a[1] ?? '').split('-') ?? [];
+    let aId = +(aArr[aArr.length - 1] ?? '0');
 
-    bArr = (b[1] ?? '').split('-') ?? [];
-    bId = +(bArr[bArr.length - 1] ?? '0');
+    let bArr = (b[1] ?? '').split('-') ?? [];
+    let bId = +(bArr[bArr.length - 1] ?? '0');
 
     return aId > bId ? 1 : -1;
   });
