@@ -1,4 +1,4 @@
-import { Client, Databases, Query, Storage } from 'node-appwrite';
+import { Client, Databases, ID, Query, Storage } from 'node-appwrite';
 import * as csv from 'csv-string';
 
 export default async ({ req, res, log, error }) => {
@@ -30,6 +30,7 @@ export default async ({ req, res, log, error }) => {
       await databases.createDocument(
         'main',
         'songs',
+        ID.unique(),
         {
           name,
           urlPatreon,
@@ -39,5 +40,5 @@ export default async ({ req, res, log, error }) => {
     }
   }
 
-  return res.send(rows);
+  return res.send('OK');
 };
