@@ -14,7 +14,16 @@ export default async ({ req, res, log, error }) => {
 
   const file = (await storage.getFileDownload('imports', fileId)).toString('utf-8');
 
-  const rows = csv.parse(file);
+  let rows = csv.parse(file);
+  rows = rows.sort((a, b) => {
+    aArr = (a[1] ?? '').split('-') ?? [];
+    aId = +(aArr[aArr.length - 1] ?? '0');
+
+    bArr = (b[1] ?? '').split('-') ?? [];
+    bId = +(bArr[bArr.length - 1] ?? '0');
+
+    return aId > bId ? 1 : -1;
+  });
 
   for (const row of rows) {
     let [name, urlPatreon, urlYoutube] = row;

@@ -6,8 +6,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
 
+		<title>Piano Tracker</title>
+
 		<link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" />
 		<link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink-icons" />
+
+		<script src="https://unpkg.com/algoliasearch@4.17.2/dist/algoliasearch-lite.umd.js"></script>
+		<script src="https://unpkg.com/instantsearch.js@4.56.3/dist/instantsearch.production.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/instantsearch.css@8.0.0/themes/satellite-min.css"
+		/>
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
