@@ -1,18 +1,43 @@
-import { Client, Storage } from 'node-appwrite';
+import { Client, Databases, Query, Storage } from 'node-appwrite';
 import * as csv from 'csv-string';
 
 export default async ({ req, res, log, error }) => {
   const client = new Client()
-     .setEndpoint('https://cloud.appwrite.io/v1')
-     .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-     .setKey(process.env.APPWRITE_API_KEY);
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+    .setKey(process.env.APPWRITE_API_KEY);
 
-    const fileId = req.body;
+  const storage = new Storage(client);
+  const databases = new Databases(client);
 
-    const storage = new Storage(client);
-    const file = (await storage.getFileDownload('imports', fileId)).toString('utf-8');
+  const fileId = req.body;
+  
+  const file = (await storage.getFileDownload('imports', fileId)).toString('utf-8');
 
-    const rows = csv.parse(file);
+  const rows = csv.parse(file);
 
-    return res.send(rows);
+  for (const row of rows) {
+    let [name, urlPatreon, urlYoutube] = row;
+
+    name = name.split("'(NEW)").join('').trim();
+
+    const existingSong = await client.database.listDocuments('main', 'song', [
+      Query.equal('name', name),
+      Query.limit(1)
+    ]);
+
+    if (existingSong.documents.length <= 0) {
+      await client.database.createDocument(
+        'main',
+        'songs',
+        {
+          name,
+          urlPatreon,
+          urlYoutube
+        }
+      );
+    }
+  }
+
+  return res.send(rows);
 };
