@@ -21,7 +21,7 @@ export default async ({ req, res, log, error }) => {
 
     name = name.split("'(NEW)").join('').trim();
 
-    const existingSong = await databases.listDocuments('main', 'song', [
+    const existingSong = await databases.listDocuments('main', 'songs', [
       Query.equal('name', name),
       Query.limit(1)
     ]);
