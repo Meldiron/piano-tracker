@@ -112,19 +112,18 @@
 		<span class="text"> Sign In </span>
 	</a>
 {:else}
-<div class="u-flex u-gap-8">
-	<button class="button is-secondary" on:click={loadAll}>
-		<span class="text"> All</span>
-	</button>
-	<button class="button is-secondary" on:click={loadCompleted}>
-		<span class="text"> Completed Only</span>
-	</button>
+	<div class="u-flex u-gap-8">
+		<button class="button is-secondary" on:click={loadAll}>
+			<span class="text"> All</span>
+		</button>
+		<button class="button is-secondary" on:click={loadCompleted}>
+			<span class="text"> Completed Only</span>
+		</button>
 
-	<button class="button is-secondary" on:click={loadIncomplete}>
-		<span class="text"> Incomplete Only</span>
-	</button>
-
-</div>
+		<button class="button is-secondary" on:click={loadIncomplete}>
+			<span class="text"> Incomplete Only</span>
+		</button>
+	</div>
 	<div class="u-flex u-gap-8">
 		<div style="width: 100%;" class="input-text-wrapper is-with-end-button">
 			<input
@@ -160,18 +159,18 @@
 									<span class="text">Completed</span>
 								</div>
 							</div>
-
-							<button
-								on:click={() => toggleCompleted(song.$id)}
-								class="button is-secondary"
-								aria-label="Add new item"
-							>
-								{#if completed}
-									<span class="icon-x" aria-hidden="true" />
-								{:else}
-									<span class="icon-check" aria-hidden="true" />
-								{/if}
-							</button>
+							<div class="u-flex u-gap-8">
+								<a href={song.urlPatreon} target="_blank" class="button is-secondary">
+									<span class="icon-external-link" aria-hidden="true" />
+								</a>
+								<button on:click={() => toggleCompleted(song.$id)} class="button is-secondary">
+									{#if completed}
+										<span class="icon-x" aria-hidden="true" />
+									{:else}
+										<span class="icon-check" aria-hidden="true" />
+									{/if}
+								</button>
+							</div>
 						</div>
 					</div>
 				{/each}
