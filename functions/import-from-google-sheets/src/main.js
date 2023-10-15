@@ -10,7 +10,7 @@ export default async ({ req, res, log, error }) => {
     const fileId = req.body;
 
     const storage = new Storage(client);
-    const file = await storage.getFileDownload('imports', fileId);
+    const file = (await storage.getFileDownload('imports', fileId)).toString('utf-8');
 
     const rows = csv.parse(file);
 
