@@ -28,7 +28,11 @@ export default async ({ req, res, log, error }) => {
   for (const row of rows) {
     let [name, urlPatreon, urlYoutube] = row;
 
-    name = name.split("'(NEW)").join('').trim();
+    if(name === 'Artist/Song (Alphabetical Order)') {
+      continue;
+    }
+
+    name = name.split("(NEW)").join('').trim();
 
     const existingSong = await databases.listDocuments('main', 'songs', [
       Query.equal('name', name),
