@@ -40,6 +40,7 @@ export default async ({ req, res, log, error }) => {
     ]);
 
     if (existingSong.documents.length <= 0) {
+      log(`Adding ${name} (${urlPatreon})`);
       await databases.createDocument(
         'main',
         'songs',
