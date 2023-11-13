@@ -32,7 +32,7 @@ export default async ({ req, res, log, error }) => {
       continue;
     }
 
-    name = name.split("(NEW)").join('').split("(Early Access)").join('').trim();
+    name = name.split("(NEW)").join('').split("(Early Access)").join('').trim(); // Remove prefixes
 
     const existingSong = await databases.listDocuments('main', 'songs', [
       Query.equal('name', name),
