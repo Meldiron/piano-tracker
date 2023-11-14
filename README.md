@@ -1,4 +1,4 @@
-# Piano Tracker
+# 🎹 Piano Tracker
 
 ## 📖 Auto-generted documentation
 
